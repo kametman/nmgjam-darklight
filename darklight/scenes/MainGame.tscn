@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://dj433asxeybx6"]
+
+[ext_resource type="Environment" uid="uid://d0620115e70uk" path="res://resources/global_environment.tres" id="1_170nv"]
+[ext_resource type="Script" path="res://scenes/MainGame.cs" id="1_r2ha4"]
+[ext_resource type="Material" uid="uid://c6hgaemlh7l5e" path="res://resources/materials/ground_material.tres" id="2_svgnm"]
+[ext_resource type="PackedScene" path="res://components/Player.tscn" id="3_wc8tb"]
+[ext_resource type="PackedScene" uid="uid://42ly4jmw8unt" path="res://components/WorldLight.tscn" id="4_0uegk"]
+[ext_resource type="Texture2D" uid="uid://b3mllsivg5rg3" path="res://resources/textures/light_meter_progress.svg" id="6_eoy5x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dfk3p"]
+size = Vector3(32, 0.001, 32)
+
+[sub_resource type="BoxMesh" id="BoxMesh_thf58"]
+material = ExtResource("2_svgnm")
+size = Vector3(32, 0.1, 32)
+
+[node name="MainGame" type="Node3D"]
+script = ExtResource("1_r2ha4")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_dfk3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_thf58")
+
+[node name="Player" parent="." instance=ExtResource("3_wc8tb")]
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 11.4876, 0)
+environment = ExtResource("1_170nv")
+current = true
+
+[node name="MainLight" parent="." instance=ExtResource("4_0uegk")]
+transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0, 13.8984, 0)
+
+[node name="ToggleTimer" type="Timer" parent="MainLight"]
+wait_time = 5.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimerLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 65.0
+offset_bottom = 46.0
+text = "0000"
+
+[node name="LightMeter" type="TextureProgressBar" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -125.0
+offset_right = -32.0
+offset_bottom = -29.0
+grow_horizontal = 0
+grow_vertical = 0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("6_eoy5x")
+
+[connection signal="timeout" from="MainLight/ToggleTimer" to="." method="OnToggleTimerTimeout"]
