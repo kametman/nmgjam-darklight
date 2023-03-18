@@ -20,7 +20,7 @@ public partial class MainGame : Node3D
 		_lightMeter.MinValue = 0;
 		_lightMeter.MaxValue = _toggleTimer.WaitTime * 100;
 
-		_toggleTimer.Start();
+		// _toggleTimer.Start();
 	}
 
 	public override void _Process(double delta)
