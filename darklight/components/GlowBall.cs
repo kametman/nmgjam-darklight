@@ -5,6 +5,8 @@ public partial class GlowBall : CharacterBody3D
 {
 	[Export] public float BallSpeed = 10f;
 
+	public bool IsDestroyed { get; private set; } = false;
+
 	private Node3D _glowBallMeshA;
 	[Export] private StandardMaterial3D[] _materialsList;
 	private StandardMaterial3D _originalMaterial;
@@ -23,8 +25,9 @@ public partial class GlowBall : CharacterBody3D
 		_originalMaterial = _materialsList[0];
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
+		if (IsDestroyed) { return; }
 		_meshesNode.Rotation += _ballDirection  * 5f * (float)delta;
 
 		var moveVelocity = _ballDirection * BallSpeed * (float)delta;
@@ -42,5 +45,10 @@ public partial class GlowBall : CharacterBody3D
 	public void SetDirection(Vector3 direction)
 	{
 		_ballDirection = direction.Normalized();
+	}
+
+	public void DestroyGlowBall()
+	{
+		IsDestroyed = true;
 	}
 }

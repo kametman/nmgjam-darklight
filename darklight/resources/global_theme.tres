@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dupilynkk23j8"]
+
+[ext_resource type="FontFile" uid="uid://buii16mbf3xpv" path="res://resources/KarenFat.ttf" id="1_pppks"]
+
+[resource]
+default_font = ExtResource("1_pppks")
