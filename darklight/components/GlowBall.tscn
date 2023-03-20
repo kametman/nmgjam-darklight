@@ -1,26 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://dc4hr27nqx0w1"]
+[gd_scene load_steps=9 format=3 uid="uid://dc4hr27nqx0w1"]
 
 [ext_resource type="Script" path="res://components/GlowBall.cs" id="1_ysw1h"]
-[ext_resource type="Material" uid="uid://jk2pfhfcyj0f" path="res://resources/materials/glow_white_material.tres" id="2_h7euf"]
 [ext_resource type="Material" uid="uid://1dp52uivi3er" path="res://resources/materials/glow_red_material.tres" id="2_lsdo0"]
 [ext_resource type="PackedScene" uid="uid://0d7g42c3fesf" path="res://resources/models/ball-b.dae" id="2_qo8o0"]
 [ext_resource type="Material" uid="uid://bklngcbow2p7t" path="res://resources/materials/glow_green_material.tres" id="4_k28s4"]
 [ext_resource type="Material" uid="uid://jsp60e4rpf1w" path="res://resources/materials/glow_blue_material.tres" id="5_14rqt"]
+[ext_resource type="CylinderMesh" uid="uid://inlwlph015pg" path="res://resources/models/glowball_collision_particle.tres" id="7_qti6m"]
 [ext_resource type="PackedScene" uid="uid://dj6fubol4xifp" path="res://resources/models/ball-a.dae" id="7_x3a8n"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0lglq"]
 radius = 0.360333
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_plrnx"]
-material = ExtResource("2_h7euf")
-top_radius = 0.0
-bottom_radius = 0.1
-height = 0.5
-
 [node name="GlowBall" type="CharacterBody3D"]
 collision_mask = 32770
 script = ExtResource("1_ysw1h")
-_materialsList = Array[StandardMaterial3D]([ExtResource("2_h7euf"), ExtResource("2_lsdo0"), ExtResource("4_k28s4"), ExtResource("5_14rqt")])
+_materialsList = Array[StandardMaterial3D]([ExtResource("2_lsdo0"), ExtResource("4_k28s4"), ExtResource("5_14rqt")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -39,13 +33,64 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 [node name="CollisionParticles" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 emitting = false
-amount = 20
+amount = 10
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 lifetime_randomness = 1.0
-mesh = SubResource("CylinderMesh_plrnx")
+mesh = ExtResource("7_qti6m")
+particle_flag_align_y = true
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 7.0
+initial_velocity_max = 10.0
+
+[node name="CollisionParticlesR" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("2_lsdo0")
+emitting = false
+amount = 3
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+mesh = ExtResource("7_qti6m")
+particle_flag_align_y = true
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 7.0
+initial_velocity_max = 10.0
+
+[node name="CollisionParticlesG" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("4_k28s4")
+emitting = false
+amount = 3
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+mesh = ExtResource("7_qti6m")
+particle_flag_align_y = true
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 7.0
+initial_velocity_max = 10.0
+
+[node name="CollisionParticlesB" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("5_14rqt")
+emitting = false
+amount = 3
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+mesh = ExtResource("7_qti6m")
 particle_flag_align_y = true
 flatness = 1.0
 gravity = Vector3(0, 0, 0)

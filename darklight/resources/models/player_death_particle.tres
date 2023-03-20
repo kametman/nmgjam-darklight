@@ -1,0 +1,8 @@
+[gd_resource type="SphereMesh" load_steps=2 format=3 uid="uid://bp6oiusda5g4h"]
+
+[ext_resource type="Material" uid="uid://jk2pfhfcyj0f" path="res://resources/materials/glow_white_material.tres" id="1_wym5n"]
+
+[resource]
+material = ExtResource("1_wym5n")
+radius = 0.1
+height = 0.2

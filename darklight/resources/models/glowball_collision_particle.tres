@@ -1,0 +1,9 @@
+[gd_resource type="CylinderMesh" load_steps=2 format=3 uid="uid://inlwlph015pg"]
+
+[ext_resource type="Material" uid="uid://jk2pfhfcyj0f" path="res://resources/materials/glow_white_material.tres" id="1_ftr3r"]
+
+[resource]
+material = ExtResource("1_ftr3r")
+top_radius = 0.0
+bottom_radius = 0.1
+height = 0.5

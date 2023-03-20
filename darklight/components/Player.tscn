@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt8ntq6t8pk64"]
+[gd_scene load_steps=10 format=3 uid="uid://bt8ntq6t8pk64"]
 
 [ext_resource type="Material" uid="uid://c0ivngj5i2f1m" path="res://resources/materials/player_material.tres" id="1_4fw86"]
 [ext_resource type="Script" path="res://components/Player.cs" id="1_vfdg0"]
+[ext_resource type="Material" uid="uid://1dp52uivi3er" path="res://resources/materials/glow_red_material.tres" id="3_pmu1m"]
+[ext_resource type="SphereMesh" uid="uid://bp6oiusda5g4h" path="res://resources/models/player_death_particle.tres" id="3_whf46"]
+[ext_resource type="Material" uid="uid://bklngcbow2p7t" path="res://resources/materials/glow_green_material.tres" id="4_5b65p"]
+[ext_resource type="Material" uid="uid://jsp60e4rpf1w" path="res://resources/materials/glow_blue_material.tres" id="5_pbbgs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5ky2x"]
 
@@ -32,3 +36,45 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 7.86371e-06, 1, 0, -1, 7.86371e-06, 0, 1.5, -0.546475)
 mesh = SubResource("PrismMesh_posjn")
 skeleton = NodePath("../..")
+
+[node name="DeathParticlesRed" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18269, 0)
+material_override = ExtResource("3_pmu1m")
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+mesh = ExtResource("3_whf46")
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+
+[node name="DeathParticlesGreen" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18269, 0)
+material_override = ExtResource("4_5b65p")
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+mesh = ExtResource("3_whf46")
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+
+[node name="DeathParticlesBlue" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18269, 0)
+material_override = ExtResource("5_pbbgs")
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+mesh = ExtResource("3_whf46")
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0

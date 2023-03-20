@@ -11,10 +11,18 @@ public partial class Player : CharacterBody3D
 	private Vector3 _facingDirection;
 	private CollisionShape3D _collisionShape;
 
+	private CpuParticles3D _deathParticlesRed;
+	private CpuParticles3D _deathParticlesGreen;
+	private CpuParticles3D _deathParticlesBlue;
+
 	public override void _Ready()
 	{
 		_playerModel = GetNode<Node3D>("PlayerModel");
 		_collisionShape = GetNode<CollisionShape3D>("CollisionShape3D");
+
+		_deathParticlesRed = GetNode<CpuParticles3D>("DeathParticlesRed");
+		_deathParticlesGreen = GetNode<CpuParticles3D>("DeathParticlesGreen");
+		_deathParticlesBlue = GetNode<CpuParticles3D>("DeathParticlesBlue");
 
 		_facingDirection = Vector3.Up;
 	}
@@ -53,8 +61,15 @@ public partial class Player : CharacterBody3D
 				if (collider is GlowBall)
 				{
 					_collisionShape.Disabled = true;
-					Visible = false;
+					_playerModel.Visible = false;
+					_deathParticlesRed.Restart();
+					_deathParticlesGreen.Restart();
+					_deathParticlesBlue.Restart();
 					EmitSignal(nameof(PlayerDestoyed));
+				}
+				else if (collider is HiddenWall)
+				{
+					((HiddenWall)collider).ShowWall();
 				}
 			}
 		}

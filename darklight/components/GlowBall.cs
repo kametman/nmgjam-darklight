@@ -15,12 +15,24 @@ public partial class GlowBall : CharacterBody3D
 
 	[Export] private Vector3 _ballDirection = Vector3.Zero;
 	private CpuParticles3D _collisionParticles;
+	private CpuParticles3D _collisionParticlesR;
+	private CpuParticles3D _collisionParticlesG;
+	private CpuParticles3D _collisionParticlesB;
+	private CpuParticles3D[] _particlesList;
 
 	public override void _Ready()
 	{
 		_meshesNode = GetNode<Node3D>("Meshes");
 		_glowBallMeshA = _meshesNode.GetNode<Node3D>("GlowBallMeshA");
 		_collisionParticles = GetNode<CpuParticles3D>("CollisionParticles");
+		_collisionParticlesR = GetNode<CpuParticles3D>("CollisionParticlesR");
+		_collisionParticlesG = GetNode<CpuParticles3D>("CollisionParticlesG");
+		_collisionParticlesB = GetNode<CpuParticles3D>("CollisionParticlesB");
+
+		_particlesList = new CpuParticles3D[]
+		{
+			_collisionParticles, _collisionParticlesR, _collisionParticlesG, _collisionParticlesB, 
+		};
 
 		_originalMaterial = _materialsList[0];
 	}
@@ -36,9 +48,18 @@ public partial class GlowBall : CharacterBody3D
 		if (collision != null)
 		{
 			_ballDirection = _ballDirection.Bounce(collision.GetNormal());
-			_collisionParticles.Direction = collision.GetNormal();
-			_collisionParticles.Restart();
-			BallSpeed += 1f;
+			for (var i = 0; i < _particlesList.Length; i++)
+			{
+				_particlesList[i].Direction = collision.GetNormal();
+				_particlesList[i].Restart();
+			}
+			BallSpeed += 0.5f;
+
+			var collider = collision.GetCollider();
+			if (collider is HiddenWall)
+			{
+				((HiddenWall)collider).ShowWall();
+			}
 		}
 	}
 

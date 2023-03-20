@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4oi0h36ko0wx"]
+
+[ext_resource type="Script" path="res://components/HiddenWall.cs" id="1_f8psq"]
+[ext_resource type="Material" uid="uid://c6hgaemlh7l5e" path="res://resources/materials/ground_material.tres" id="2_1dhlt"]
+[ext_resource type="Material" uid="uid://jk2pfhfcyj0f" path="res://resources/materials/glow_white_material.tres" id="3_p7t68"]
+[ext_resource type="Material" uid="uid://1dp52uivi3er" path="res://resources/materials/glow_red_material.tres" id="4_u33vm"]
+[ext_resource type="Material" uid="uid://bklngcbow2p7t" path="res://resources/materials/glow_green_material.tres" id="5_vjdgw"]
+[ext_resource type="Material" uid="uid://jsp60e4rpf1w" path="res://resources/materials/glow_blue_material.tres" id="6_0ujyb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uuvt4"]
+size = Vector3(0.25, 4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vm37t"]
+material = ExtResource("2_1dhlt")
+size = Vector3(0.25, 4, 4)
+
+[node name="HiddenWall" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00501204, -0.0096674, -0.0135121)
+collision_layer = 32768
+script = ExtResource("1_f8psq")
+_normalWallMaterial = ExtResource("2_1dhlt")
+_visibleWallMaterials = Array[Material]([ExtResource("3_p7t68"), ExtResource("4_u33vm"), ExtResource("5_vjdgw"), ExtResource("6_0ujyb")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_uuvt4")
+
+[node name="WallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_vm37t")
+
+[node name="VisibilityTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="timeout" from="VisibilityTimer" to="." method="OnVisibilityTimerTimeout"]

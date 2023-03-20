@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvwd8pikf4j1t"]
+[gd_scene load_steps=11 format=3 uid="uid://dvwd8pikf4j1t"]
 
 [ext_resource type="Environment" uid="uid://d0620115e70uk" path="res://resources/global_environment.tres" id="1_an3xm"]
 [ext_resource type="Script" path="res://scenes/PlayField.cs" id="1_omibh"]
 [ext_resource type="Material" uid="uid://c6hgaemlh7l5e" path="res://resources/materials/ground_material.tres" id="3_cjj2o"]
-[ext_resource type="PackedScene" uid="uid://b4oi0h36ko0wx" path="res://components/Wall.tscn" id="3_oiamx"]
 [ext_resource type="PackedScene" uid="uid://42ly4jmw8unt" path="res://components/WorldLight.tscn" id="5_et7bf"]
 [ext_resource type="PackedScene" uid="uid://bt8ntq6t8pk64" path="res://components/Player.tscn" id="5_kv6wr"]
+[ext_resource type="Texture2D" uid="uid://chftj71dia215" path="res://resources/textures/progress_bar_underlay.png" id="7_600hb"]
+[ext_resource type="Texture2D" uid="uid://chns1ddt8aw04" path="res://resources/textures/progress_bar.png" id="8_jxtvw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qmlt0"]
 size = Vector3(32, 10, 1)
@@ -79,102 +80,6 @@ mesh = SubResource("BoxMesh_ljhbu")
 mesh = SubResource("BoxMesh_wks37")
 skeleton = NodePath("../..")
 
-[node name="Wall" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
-visible = false
-
-[node name="Wall2" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-visible = false
-
-[node name="Wall3" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-visible = false
-
-[node name="Wall4" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
-visible = false
-
-[node name="Wall5" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 10)
-visible = false
-
-[node name="Wall6" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 10)
-visible = false
-
-[node name="Wall7" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 10)
-visible = false
-
-[node name="Wall8" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 10)
-visible = false
-
-[node name="Wall9" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -10)
-visible = false
-
-[node name="Wall10" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -10)
-visible = false
-
-[node name="Wall11" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
-visible = false
-
-[node name="Wall12" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -10)
-visible = false
-
-[node name="Wall13" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 12)
-visible = false
-
-[node name="Wall14" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 4)
-visible = false
-
-[node name="Wall15" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -4)
-visible = false
-
-[node name="Wall16" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -12)
-visible = false
-
-[node name="Wall17" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 12)
-visible = false
-
-[node name="Wall18" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 4)
-visible = false
-
-[node name="Wall19" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -4)
-visible = false
-
-[node name="Wall20" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -12)
-visible = false
-
-[node name="Wall21" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 12)
-visible = false
-
-[node name="Wall22" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 4)
-visible = false
-
-[node name="Wall23" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, -4)
-visible = false
-
-[node name="Wall24" parent="Boundaries" instance=ExtResource("3_oiamx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, -12)
-visible = false
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
 fov = 60.0
@@ -194,7 +99,7 @@ one_shot = true
 wait_time = 3.0
 
 [node name="LevelEndTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 
 [node name="Player" parent="." instance=ExtResource("5_kv6wr")]
 
@@ -249,6 +154,26 @@ offset_bottom = 52.0
 theme_override_font_sizes/font_size = 24
 text = "Score: 0"
 vertical_alignment = 1
+
+[node name="LoadingProgressBar" type="TextureProgressBar" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = 112.0
+offset_right = -1.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+value = 50.0
+fill_mode = 6
+texture_under = ExtResource("7_600hb")
+texture_progress = ExtResource("8_jxtvw")
 
 [connection signal="timeout" from="GameStartTimer" to="." method="OnGameStartTimerTimeout"]
 [connection signal="timeout" from="GlowBallSpawnTimer" to="." method="OnGlowBallSpawnTimerTimeout"]

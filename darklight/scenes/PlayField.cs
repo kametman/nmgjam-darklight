@@ -8,6 +8,7 @@ public partial class PlayField : Node3D
 	[Export] public int CountdownTimer = 3;
 	private PackedScene _glowBallPrefab = null;
 	private PackedScene _glowBrickPrefab = null;
+	private PackedScene _hiddenWallPrefab = null;
 
 	private int _startingGlowBricks = 3;
 	private int _glowBrickDestoyed;
@@ -26,12 +27,14 @@ public partial class PlayField : Node3D
 	private Label _countdownTimerLabel;
 	private Label _glowBrickCountLabel;
 	private Label _currentScoreLabel;
+	private TextureProgressBar _loadingProgresBar;
 
 	public override void _Ready()
 	{
 		GameData.PlayerInputDisabled = true;
 		_glowBallPrefab = ResourceLoader.Load<PackedScene>("uid://dc4hr27nqx0w1");
 		_glowBrickPrefab = ResourceLoader.Load<PackedScene>("uid://b5gff6pkt8hff");
+		_hiddenWallPrefab = ResourceLoader.Load<PackedScene>("uid://b4oi0h36ko0wx");
 
 		_player = GetNode<Player>("Player");
 
@@ -42,6 +45,7 @@ public partial class PlayField : Node3D
 		_countdownTimerLabel = GetNode<Label>("UI/CountdownTimerLabel");
 		_glowBrickCountLabel = GetNode<Label>("UI/GlowBrickCountLabel");
 		_currentScoreLabel = GetNode<Label>("UI/CurrentScoreLabel");
+		_loadingProgresBar = GetNode<TextureProgressBar>("UI/LoadingProgressBar");
 
 		_currentCountdown = CountdownTimer;
 		_startingGlowBricks = GameData.CurrentLevel;
@@ -60,6 +64,11 @@ public partial class PlayField : Node3D
 		}
 		_glowBrickCountLabel.Text = $"{_glowBrickDestoyed} / {_glowBricksList.Count}";
 		_currentScoreLabel.Text = $"SCORE: {GameData.CurrentScore}";
+
+		if (_loadingProgresBar.Visible)
+		{
+			_loadingProgresBar.Value = (_levelEndTimer.TimeLeft / _levelEndTimer.WaitTime) * 100;
+		}
 	}
 
 	public void OnGameStartTimerTimeout()
@@ -132,16 +141,29 @@ public partial class PlayField : Node3D
 	private void DestroyGlowBrick(int brickID)
 	{
 		_glowBrickDestoyed++;
-		GameData.CurrentScore++;
+		GameData.CurrentScore += 50;
 
 		if (_glowBrickDestoyed == _glowBricksList.Count)
 		{
+			GameData.CurrentScore += 1000;
+			if (_glowBallsList.Count > GameData.CurrentLevel)
+			{
+				GameData.CurrentScore -= _glowBallsList.Count - GameData.CurrentLevel;
+			}
+			else
+			{
+				GameData.CurrentScore += 500;
+			}
+
 			GameData.PlayerInputDisabled = true;
 
 			for (var i = 0; i < _glowBallsList.Count; i++)
 			{
 				_glowBallsList[i].DestroyGlowBall();
 			}
+
+			_loadingProgresBar.Visible = true;
+			_loadingProgresBar.Value = 0;
 
 			_levelEndTimer.Start();
 		}
