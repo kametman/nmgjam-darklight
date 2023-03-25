@@ -65,6 +65,8 @@ public partial class Player : CharacterBody3D
 					_deathParticlesRed.Restart();
 					_deathParticlesGreen.Restart();
 					_deathParticlesBlue.Restart();
+					AudioManager.PlaySoundEffect(AudioManager.SoundEffects.PlayerDeath);
+
 					EmitSignal(nameof(PlayerDestoyed));
 				}
 				else if (collider is HiddenWall)

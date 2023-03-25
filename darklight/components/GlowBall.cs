@@ -10,6 +10,7 @@ public partial class GlowBall : CharacterBody3D
 	private Node3D _glowBallMeshA;
 	[Export] private StandardMaterial3D[] _materialsList;
 	private StandardMaterial3D _originalMaterial;
+	private OmniLight3D _omniLight3D;
 
 	private Node3D _meshesNode;
 
@@ -24,6 +25,7 @@ public partial class GlowBall : CharacterBody3D
 	{
 		_meshesNode = GetNode<Node3D>("Meshes");
 		_glowBallMeshA = _meshesNode.GetNode<Node3D>("GlowBallMeshA");
+		_omniLight3D = GetNode<OmniLight3D>("OmniLight3D");
 		_collisionParticles = GetNode<CpuParticles3D>("CollisionParticles");
 		_collisionParticlesR = GetNode<CpuParticles3D>("CollisionParticlesR");
 		_collisionParticlesG = GetNode<CpuParticles3D>("CollisionParticlesG");
@@ -54,11 +56,12 @@ public partial class GlowBall : CharacterBody3D
 				_particlesList[i].Restart();
 			}
 			BallSpeed += 0.5f;
+			AudioManager.PlaySoundEffect(AudioManager.SoundEffects.GlowBallBounce);
 
 			var collider = collision.GetCollider();
 			if (collider is HiddenWall)
 			{
-				((HiddenWall)collider).ShowWall();
+				((HiddenWall)collider).ShowWall(true);
 			}
 		}
 	}
@@ -71,5 +74,12 @@ public partial class GlowBall : CharacterBody3D
 	public void DestroyGlowBall()
 	{
 		IsDestroyed = true;
+		_meshesNode.Visible = false;
+		_omniLight3D.Visible = false;
+		for (var i = 0; i < _particlesList.Length; i++)
+		{
+			_particlesList[i].Spread = 180f;
+			_particlesList[i].Restart();
+		}
 	}
 }

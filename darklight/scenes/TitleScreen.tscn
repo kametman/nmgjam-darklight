@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://45lv0wd6ottn"]
+
+[ext_resource type="PackedScene" uid="uid://36rxgxdble8s" path="res://resources/models/nox-title-plate.dae" id="1_4c1ct"]
+[ext_resource type="Script" path="res://scenes/TitleScreen.cs" id="1_7s62w"]
+[ext_resource type="Environment" uid="uid://d0620115e70uk" path="res://resources/global_environment.tres" id="2_o4vkk"]
+
+[node name="TitleScreen" type="Node3D"]
+script = ExtResource("1_7s62w")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_o4vkk")
+
+[node name="TitlePlateLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+light_energy = 16.0
+omni_range = 15.0
+
+[node name="TitlePlate" parent="." instance=ExtResource("1_4c1ct")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.40439, 5.70563)
+
+[node name="LightTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonBackground" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 391.0
+offset_right = 480.0
+offset_bottom = 546.0
+color = Color(0.152941, 0.164706, 0.196078, 0.419608)
+
+[node name="StartButton" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -59.0
+offset_top = -192.0
+offset_right = -4.0
+offset_bottom = -168.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+text = "START"
+
+[node name="ChallengeButton" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -129.0
+offset_right = -2.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+text = "!!!"
+
+[connection signal="timeout" from="LightTimer" to="." method="OnLightTimerTimeout"]
+[connection signal="pressed" from="UI/StartButton" to="." method="OnStartButtonPressed"]
+[connection signal="pressed" from="UI/ChallengeButton" to="." method="OnChallengeButtonPressed"]

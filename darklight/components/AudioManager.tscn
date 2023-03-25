@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3 uid="uid://bisg56pkume4m"]
+
+[ext_resource type="Script" path="res://components/AudioManager.cs" id="1_j5avs"]
+[ext_resource type="AudioStream" uid="uid://c74w135trfxq6" path="res://resources/audio/player_death.wav" id="2_8fk10"]
+[ext_resource type="AudioStream" uid="uid://bbb7nifiia4o8" path="res://resources/audio/coundown_beep.wav" id="3_2coka"]
+[ext_resource type="AudioStream" uid="uid://sbqlcfi00qg3" path="res://resources/audio/game_start.wav" id="4_8lu1j"]
+[ext_resource type="AudioStream" uid="uid://bc87oxfd7v54o" path="res://resources/audio/fire_glowball.wav" id="5_p23an"]
+[ext_resource type="AudioStream" uid="uid://eii5r4grfu4q" path="res://resources/audio/glowball_bounce.wav" id="6_5s8qx"]
+[ext_resource type="AudioStream" uid="uid://cwm75rjuh7yfv" path="res://resources/audio/glowbrick_pickup.wav" id="7_h0xsj"]
+[ext_resource type="AudioStream" uid="uid://tynro4tgf4ga" path="res://resources/audio/main_game.wav" id="8_n23u3"]
+[ext_resource type="AudioStream" uid="uid://b68ewf0f850n2" path="res://resources/audio/wall_bump.wav" id="8_p4v17"]
+[ext_resource type="AudioStream" uid="uid://crh7xon8ejm4x" path="res://resources/audio/stage_clear.wav" id="10_gexjb"]
+
+[node name="AudioManager" type="Node3D"]
+script = ExtResource("1_j5avs")
+
+[node name="PlayerDeathSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_8fk10")
+bus = &"SfxReverb"
+
+[node name="CountdownSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_2coka")
+bus = &"SFX"
+
+[node name="GameStartSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_8lu1j")
+bus = &"SFX"
+
+[node name="FireGlowBallSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_p23an")
+bus = &"SFX"
+
+[node name="GlowBallBounceSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_5s8qx")
+bus = &"SFX"
+
+[node name="GlowBrickPickupSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_h0xsj")
+bus = &"SFX"
+
+[node name="WallBumpSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_p4v17")
+bus = &"SFX"
+
+[node name="MainGameMusic" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_n23u3")
+bus = &"Music"
+
+[node name="StageClearMusic" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_gexjb")
+bus = &"Music"

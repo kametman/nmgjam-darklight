@@ -8,11 +8,11 @@
 [ext_resource type="Material" uid="uid://jsp60e4rpf1w" path="res://resources/materials/glow_blue_material.tres" id="6_0ujyb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uuvt4"]
-size = Vector3(0.25, 4, 4)
+size = Vector3(0.25, 4, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vm37t"]
 material = ExtResource("2_1dhlt")
-size = Vector3(0.25, 4, 4)
+size = Vector3(0.25, 4, 2)
 
 [node name="HiddenWall" type="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00501204, -0.0096674, -0.0135121)

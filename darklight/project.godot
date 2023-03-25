@@ -10,14 +10,20 @@ config_version=5
 
 [application]
 
-config/name="darklight"
-run/main_scene="res://scenes/PlayField.tscn"
-config/features=PackedStringArray("4.0", "C#", "Forward Plus")
+config/name="N0X"
+run/main_scene="res://scenes/TitleScreen.tscn"
+config/features=PackedStringArray("4.0", "Forward Plus")
+run/max_fps=60
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://resources/textures/kmLogo.png"
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=1500
 
 [autoload]
 
 GameData="*res://components/GameData.cs"
+AudioManager="*res://components/AudioManager.tscn"
 
 [display]
 

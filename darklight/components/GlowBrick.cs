@@ -39,6 +39,7 @@ public partial class GlowBrick : CharacterBody3D
 				_collisionShape.Disabled = true;
 				Visible = false;
 				EmitSignal(nameof(GlowBrickDestroyed), BrickID);
+				AudioManager.PlaySoundEffect(AudioManager.SoundEffects.GlowBrickPickup);
 			}
 		}
 	}
