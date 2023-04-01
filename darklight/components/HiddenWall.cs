@@ -59,6 +59,7 @@ public partial class HiddenWall : StaticBody3D
 		{
 			IsHidden = false;
 			AudioManager.PlaySoundEffect(AudioManager.SoundEffects.WallBump);
+			_wallMesh.Visible = true;
 			_visibilityTimer.Start();
 		}
 	}
@@ -66,6 +67,7 @@ public partial class HiddenWall : StaticBody3D
 	public void HideWall()
 	{
 		_wallMesh.MaterialOverride = _normalWallMaterial;
+		_wallMesh.Visible = false;
 		IsHidden = true;
 	}
 }

@@ -27,6 +27,7 @@ shape = SubResource("BoxShape3D_uuvt4")
 
 [node name="WallMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
 mesh = SubResource("BoxMesh_vm37t")
 
 [node name="VisibilityTimer" type="Timer" parent="."]

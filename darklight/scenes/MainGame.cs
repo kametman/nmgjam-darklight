@@ -21,6 +21,7 @@ public partial class MainGame : Node3D
 	private bool _playerDestoyed = false;
 	private string _stageClearText = "";
 	private string _gameOverText = "GAME OVER";
+	private List<int> _bricksXRange, _bricksZRange, _wallsXRange, _wallsZRange;
 
 	private List<GlowBrick> _glowBricksList;
 	private List<GlowBall> _glowBallsList;
@@ -67,6 +68,7 @@ public partial class MainGame : Node3D
 		_startingGlowBricks = GameData.CurrentLevel;
 		_startingHiddenBlocks = _startingGlowBricks * 2;
 
+		InitializeObjectPositionRanges();
 		GD.Randomize();
 		InitializePlayField();
 
@@ -131,6 +133,46 @@ public partial class MainGame : Node3D
 
 	}
 
+	private void InitializeObjectPositionRanges()
+	{
+		_bricksXRange = new List<int>();
+		_wallsXRange = new List<int>();
+		_bricksZRange = new List<int>();
+		_wallsZRange = new List<int>();
+
+		for (var i = (-RoomWidth / 2) + DeadZoneSize; i < (RoomWidth / 2) - DeadZoneSize; i++)
+		{
+			if (i >= -DeadZoneSize && i <= DeadZoneSize)
+			{
+				continue;
+			}
+			else if (i % 2 == 0)
+			{
+				_bricksXRange.Add(i);
+			}
+			else 
+			{
+				_wallsXRange.Add(i);
+			}
+		}
+
+		for (var i = (-RoomLength / 2) + DeadZoneSize; i < (RoomLength / 2) - DeadZoneSize; i++)
+		{
+			if (i >= -DeadZoneSize && i <= DeadZoneSize)
+			{
+				continue;
+			}
+			else if (i % 2 == 0)
+			{
+				_bricksZRange.Add(i);
+			}
+			else 
+			{
+				_wallsZRange.Add(i);
+			}
+		}
+	}
+
 	private void InitializePlayField()
 	{
 		_glowBricksList = new List<GlowBrick>();
@@ -149,7 +191,10 @@ public partial class MainGame : Node3D
 	{
 		for (var i = 0; i < _startingGlowBricks; i++)
 		{
-			var spawnPosition = new Vector3((int)GD.RandRange(-12f, 11f), 0f, (int)GD.RandRange(-12f, 11f)) * 2;
+			var brickXPos = _bricksXRange[(int)(GD.Randi() % _bricksXRange.Count)];
+			var brickZPos = _bricksXRange[(int)(GD.Randi() % _bricksZRange.Count)];
+
+			var spawnPosition = new Vector3(brickXPos, 0f, brickZPos);
 			spawnPosition += new Vector3(1f, 0f, 1f);
 			var newGlowBrick = _glowBrickPrefab.Instantiate<GlowBrick>();
 			newGlowBrick.Init(spawnPosition, i);
@@ -164,7 +209,10 @@ public partial class MainGame : Node3D
 	{
 		for(var i = 0; i < _startingHiddenBlocks; i++)
 		{
-			var spawnPosition = new Vector3((int)GD.RandRange(-11f, 11f), 0f, (int)GD.RandRange(-11f, 11f)) * 2;
+			var wallXPos = _wallsXRange[(int)(GD.Randi() % _wallsXRange.Count)];
+			var wallZPos = _wallsXRange[(int)(GD.Randi() % _wallsZRange.Count)];
+
+			var spawnPosition = new Vector3(wallXPos, 0f, wallZPos);
 			if (spawnPosition == Vector3.Zero) { continue; }
 
 			var newWall = _hiddenWallPrefab.Instantiate<HiddenWall>();

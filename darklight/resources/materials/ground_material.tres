@@ -1,8 +1,8 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c6hgaemlh7l5e"]
 
-[ext_resource type="Texture2D" uid="uid://biy1noy14mw8i" path="res://resources/textures/checker_dark_lg.png" id="1_8gtfx"]
+[ext_resource type="Texture2D" uid="uid://b3nmlocf3qja8" path="res://resources/textures/black_bkgd.png" id="1_ofby4"]
 
 [resource]
-albedo_texture = ExtResource("1_8gtfx")
+albedo_texture = ExtResource("1_ofby4")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
